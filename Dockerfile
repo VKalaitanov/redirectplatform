@@ -22,7 +22,5 @@ RUN apk del .build-deps
 # Копирование проекта
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "redirectplatform.wsgi:application"]
-
 # Настройка записи и доступа
 RUN chmod -R 777 ./
