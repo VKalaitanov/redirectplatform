@@ -45,6 +45,6 @@ services:
       POSTGRES_DB: redirect_db
       POSTGRES_USER: redirect_user
       POSTGRES_PASSWORD: ASDKLA87SD6FG9875XCV
-      HOST: pgdb
+      HOST: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data/

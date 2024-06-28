@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'redirect_db',
         'USER': 'redirect_user',
         'PASSWORD': 'ASDKLA87SD6FG9875XCV',
-        'HOST': 'pgdb',
+        'HOST': 'postgres',
         'PORT': '5432'
     }
 }
