@@ -10,7 +10,7 @@ services:
     build:
       context: .
     ports:
-      - '8001:8000'
+      - '8000:8000'
     container_name: django
     volumes:
       - ./:/app
@@ -18,14 +18,14 @@ services:
       - media:/app/media
     depends_on:
       - postgres
-    command: sh -c "python manage.py collectstatic --no-input &&
-                    python manage.py makemigrations &&
-                    python manage.py migrate && 
-                    gunicorn --workers=4 --reload --max-requests=1000 redirectplatfom.wsgi -b 0.0.0.0:8001"
+    command: >
+      sh -c "python manage.py collectstatic --no-input &&
+             python manage.py makemigrations &&
+             python manage.py migrate && 
+             gunicorn --workers=4 --reload --max-requests=1000 redirectplatform.wsgi -b 0.0.0.0:8000"
 
   nginx:
     container_name: nginx
-    working_dir: /app
     image: nginx:stable-alpine
     restart: always
     ports:
@@ -47,7 +47,3 @@ services:
       POSTGRES_PASSWORD: ASDKLA87SD6FG9875XCV
     volumes:
       - pgdata:/var/lib/postgresql/data/
-
-
-
-
