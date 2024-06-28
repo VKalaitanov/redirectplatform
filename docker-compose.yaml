@@ -29,7 +29,7 @@ services:
     image: nginx:stable-alpine
     restart: always
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
       - static:/app/static
       - media:/app/media
