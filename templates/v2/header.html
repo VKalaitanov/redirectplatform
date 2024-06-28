@@ -1,0 +1,69 @@
+{% load static %}
+
+<div class="header__container container">
+    <a class="header__logo" href="{% url 'platform_main:home' %}">
+        <img src="{% static 'images/logo.svg' %}" alt="Логотип" loading="lazy" width="157" height="49">
+    </a>
+    <nav class="header__nav">
+        <ul class="header__list">
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:home' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#home"></use>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:campaigns_list' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#users"></use>
+                    </svg>
+                    Campaign
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:total_statistics' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#graph"></use>
+                    </svg>
+                    Statistics
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:user_invoices_list' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#money"></use>
+                    </svg>
+                    Payments
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header__info">
+        <div class="header__balance">
+            <svg class="sprite header__currency" viewBox="0 0 24 24" width="24" height="24">
+                <use href="{% static 'images/sprite.svg' %}#oval-dollar"></use>
+            </svg>
+            {{ request.user.balance }}
+        </div>
+        <div class="header__user">
+            <div class="header__content">
+                <div class="header__name">{{ request.user.name }}</div>
+                <div class="header__mail small-text">{{ request.user.email }}</div>
+            </div>
+        </div>
+
+        <!-- if you need to use button just uncomment under code -->
+        <!--<button class="header__logout">
+          @<svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+      <use href="img/sprite.svg#logout"></use>
+  </svg>
+        </button>-->
+        <a class="header__logout" href="{% url 'platform_main:logout' %}" aria-label="Logout">
+            <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+                <use href="{% static 'images/sprite.svg' %}#logout"></use>
+            </svg>
+        </a>
+    </div>
+</div>

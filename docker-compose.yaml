@@ -1,0 +1,53 @@
+version: "3.10"
+
+volumes:
+  pgdata:
+  static:
+  media:
+
+services:
+  django:
+    build:
+      context: .
+    ports:
+      - '8001:8000'
+    container_name: django
+    volumes:
+      - ./:/app
+      - static:/app/static
+      - media:/app/media
+    depends_on:
+      - postgres
+    command: sh -c "python manage.py collectstatic --no-input &&
+                    python manage.py makemigrations &&
+                    python manage.py migrate && 
+                    gunicorn --workers=4 --reload --max-requests=1000 redirectplatfom.wsgi -b 0.0.0.0:8001"
+
+  nginx:
+    container_name: nginx
+    working_dir: /app
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - "81:80"
+    volumes:
+      - static:/app/static
+      - media:/app/media
+      - ./docker/nginx/prod/:/etc/nginx/conf.d:ro
+    depends_on:
+      - django
+
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: redirect_db
+      POSTGRES_USER: redirect_user
+      POSTGRES_PASSWORD: ASDKLA87SD6FG9875XCV
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+
+
+
