@@ -41,10 +41,7 @@ services:
     image: postgres:alpine
     container_name: postgres
     restart: always
-    environment:
-      POSTGRES_DB: redirect_db
-      POSTGRES_USER: redirect_user
-      POSTGRES_PASSWORD: ASDKLA87SD6FG9875XCV
-      HOST: postgres
+    env_file:
+      - docker/env/.env.prod
     volumes:
       - pgdata:/var/lib/postgresql/data/
